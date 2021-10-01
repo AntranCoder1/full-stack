@@ -1,0 +1,50 @@
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "jim",
+    "password": "jim"
+}
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "tranthanhan",
+    "password": "tranthanhan"
+}
+
+###
+POST  http://localhost:3000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU2ZDU1MGY0ZTBiMjIwYmMzNzdiZjkiLCJpYXQiOjE2MzMwODA2NTd9.5V7oRlEJzrFWjrPx3b75Sl4Bu3rCdHqOXNKWK_q9etE
+
+{
+    "title": "React",
+    "description": "React",
+    "url": "reactjs.org",
+    "status": "TO LEARN"
+}
+
+####
+GET http://localhost:3000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU2ZDU1MGY0ZTBiMjIwYmMzNzdiZjkiLCJpYXQiOjE2MzMwODA2NTd9.5V7oRlEJzrFWjrPx3b75Sl4Bu3rCdHqOXNKWK_q9etE
+
+###
+PUT http://localhost:3000/api/posts/6156d5cfbcbf28216cbc612e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU2ZDU1MGY0ZTBiMjIwYmMzNzdiZjkiLCJpYXQiOjE2MzMwODA2NTd9.5V7oRlEJzrFWjrPx3b75Sl4Bu3rCdHqOXNKWK_q9etE
+
+{
+    "title": "Nodejs",
+    "description": "Nodejs",
+    "url": "node.org",
+    "status": "LEARNING"
+}
+
+###
+DELETE http://localhost:3000/api/posts/6156d5cfbcbf28216cbc612e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU2ZDU1MGY0ZTBiMjIwYmMzNzdiZjkiLCJpYXQiOjE2MzMwODA2NTd9.5V7oRlEJzrFWjrPx3b75Sl4Bu3rCdHqOXNKWK_q9etE
+
