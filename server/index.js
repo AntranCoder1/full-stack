@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const authRouter = require('./routers/auth.routers');
 const postRouter = require('./routers/post.routers');
@@ -28,6 +29,7 @@ const connectDB = async () => {
 connectDB()
 
 app.use(express.json());
+app.use(cors());
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 
