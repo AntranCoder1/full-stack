@@ -15,7 +15,7 @@ const NavbarMenu = () => {
 
     return (
         <Navbar expand='lg' bg='primary' variant='dark' className='shadow'>
-            <Navbar.Brand className='font-weight-bolder text-white'>
+            <Navbar.Brand className='font-weight-bolder text-white' style={{ marginLeft: '1rem' }}>
                 <img src={learnItLogo} alt='logo' width='32' height='32' className='mr-2' />
                 LearnIt
             </Navbar.Brand>
@@ -30,7 +30,7 @@ const NavbarMenu = () => {
                     </Nav.Link>
                 </Nav>
 
-                <Nav>
+                <Nav style={{ marginLeft: '61rem' }}>
                     <Nav.Link className='font-weight-bolder text-white' disabled>
                         Welcome {username}
                     </Nav.Link>

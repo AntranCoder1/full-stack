@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Badge from 'react-bootstrap/Badge'
-import Button from 'react-bootstrap/Button'
+import ActionButtons from './ActionButtons'
 
 const SinglePost = ({ post: { _id, status, title, description, url } }) => (
 	<Card
@@ -22,6 +22,7 @@ const SinglePost = ({ post: { _id, status, title, description, url } }) => (
 						<p className='post-title'>{title}</p>
 						<Badge
 							pill
+                            style={{ background: '#ffc266' }}
 							variant={
 								status === 'LEARNED'
 									? 'success'
@@ -34,7 +35,7 @@ const SinglePost = ({ post: { _id, status, title, description, url } }) => (
 						</Badge>
 					</Col>
 					<Col className='text-right'>
-						Button
+						<ActionButtons url={url} _id={_id} />
 					</Col>
 				</Row>
 			</Card.Title>

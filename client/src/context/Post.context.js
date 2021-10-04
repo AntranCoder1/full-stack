@@ -14,6 +14,8 @@ const PostContextProvider = ({children}) => {
         postLoading: true
     }) 
 
+    const [showAddPostModal, setShowAddPostModal] = useState(false)
+
     // Get All Post
     const getPost = async () => {
         try {
@@ -26,7 +28,7 @@ const PostContextProvider = ({children}) => {
     }
 
     // Post context data
-    const postContextData = { postState, getPost }
+    const postContextData = { postState, getPost, showAddPostModal, setShowAddPostModal }
 
     return (
         <postContext.Provider value={postContextData}>

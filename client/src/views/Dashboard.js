@@ -6,7 +6,12 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import SinglePost from '../components/posts/SinglePost';
+import ActionButtons from '../components/posts/ActionButtons';
+import AddPostModal from '../components/posts/AddPostModal';
+import AddIcon from '../assets/plus-circle-fill.svg';
 
 const Dashboard = () => {
 
@@ -14,7 +19,7 @@ const Dashboard = () => {
 
     const { authState: { user: { username } } } = useContext(AuthContext)
 
-    const { postState: { posts, postsLoading }, getPost } = useContext(postContext)
+    const { postState: { posts, postsLoading }, getPost, setShowAddPostModal } = useContext(postContext)
 
     // start: Get all posts
     useEffect(() => getPost(), [])
@@ -54,6 +59,13 @@ const Dashboard = () => {
                         ))
                     }
                 </Row>
+
+                {/* Open add post modal */}
+                <OverlayTrigger placement="left" overlay={<Tooltip>Add a new thing to learn</Tooltip>}>
+                    <Button className="btn-floating" onClick={setShowAddPostModal.bind(this, true)}>
+                        <img src={AddIcon} alt="add-post" width="60" height="60" />
+                    </Button>
+                </OverlayTrigger>
             </>
         )
     }
@@ -61,6 +73,7 @@ const Dashboard = () => {
     return (
         <>
             {body}
+            <AddPostModal />
         </>
     )
 }
