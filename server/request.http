@@ -22,10 +22,10 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU2ZDU1MGY0ZTBiMjIwYmMzNzdiZjkiLCJpYXQiOjE2MzMwODA2NTd9.5V7oRlEJzrFWjrPx3b75Sl4Bu3rCdHqOXNKWK_q9etE
 
 {
-    "title": "React",
-    "description": "React",
-    "url": "reactjs.org",
-    "status": "TO LEARN"
+    "title": "Nodejs",
+    "description": "Nodejs",
+    "url": "express.com",
+    "status": "LEARNING"
 }
 
 ####
