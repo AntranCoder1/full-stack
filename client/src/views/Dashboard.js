@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+import Toast from 'react-bootstrap/Toast'
 import SinglePost from '../components/posts/SinglePost';
 import ActionButtons from '../components/posts/ActionButtons';
 import AddPostModal from '../components/posts/AddPostModal';
@@ -19,7 +20,13 @@ const Dashboard = () => {
 
     const { authState: { user: { username } } } = useContext(AuthContext)
 
-    const { postState: { posts, postsLoading }, getPost, setShowAddPostModal } = useContext(postContext)
+    const { 
+        postState: { posts, postsLoading }, 
+        getPost, 
+        setShowAddPostModal, 
+        showToast: { show, message, type },
+        setShowToast 
+    } = useContext(postContext)
 
     // start: Get all posts
     useEffect(() => getPost(), [])
@@ -42,7 +49,7 @@ const Dashboard = () => {
                         <Card.Text>
                             Click the button below to track your first skill to learn 
                         </Card.Text>
-                        <Button variant="primary">LearnIt!</Button>
+                        <Button variant="primary" onClick={setShowAddPostModal.bind(this, true)}>LearnIt!</Button>
                     </Card.Body>
                 </Card>
             </>
@@ -74,6 +81,20 @@ const Dashboard = () => {
         <>
             {body}
             <AddPostModal />
+
+            {/* After post is added, show toats */}
+            <Toast 
+                show={show} 
+                style={{ position: 'fixed', top: '20%', right: '10px' }} 
+                className={ `bg-${type} text-white` }
+                onClose={setShowToast.bind(this, { show: false, message: '', type: null })}
+                delay={3000}
+                autohide
+            >
+                <Toast.Body>
+                    <strong>{message}</strong>
+                </Toast.Body>
+            </Toast>
         </>
     )
 }

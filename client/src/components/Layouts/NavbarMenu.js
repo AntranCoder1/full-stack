@@ -30,7 +30,7 @@ const NavbarMenu = () => {
                     </Nav.Link>
                 </Nav>
 
-                <Nav style={{ marginLeft: '61rem' }}>
+                <Nav style={{ marginLeft: '55rem' }}>
                     <Nav.Link className='font-weight-bolder text-white' disabled>
                         Welcome {username}
                     </Nav.Link>

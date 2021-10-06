@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -7,18 +7,44 @@ import { postContext } from '../../context/Post.context'
 const AddPostModal = () => {
 
     // context
-    const { showAddPostModal, setShowAddPostModal } = useContext(postContext)
+    const { showAddPostModal, setShowAddPostModal, addPost, showToast, setShowToast } = useContext(postContext)
+
+	// State
+	const [newPost, setNewPost] = useState({
+		title: '',
+		description: '',
+		url: '',
+		status: 'TO LEARN'
+	})
+
+	const { title, description, url } = newPost
+	
+	const onChangeNewPostForm = (event) => {
+		setNewPost({...newPost, [event.target.name]: event.target.value })
+	}
 
     const closeDialog = () => {
-        setShowAddPostModal(false)
+		resetAddPostData()
     }
+
+	const onSubmit = async event => {
+		event.preventDefault();
+		const { success, message } = await addPost(newPost)
+		resetAddPostData()
+		setShowToast({ show: true, message, type: success ? 'success' : 'danger' })
+	}
+
+	const resetAddPostData = () => {
+		setNewPost({title: '', description: '', url: '', status: 'TO LEARN'})
+		setShowAddPostModal(false)
+	}
 
     return (
         <Modal show={showAddPostModal} onHide={closeDialog}>
 			<Modal.Header closeButton>
 				<Modal.Title>What do you want to learn?</Modal.Title>
 			</Modal.Header>
-			<Form>
+			<Form onSubmit={onSubmit}>
 				<Modal.Body>
 					<Form.Group>
 						<Form.Control
@@ -27,6 +53,8 @@ const AddPostModal = () => {
 							name='title'
 							required
 							aria-describedby='title-help'
+							value={title}
+							onChange={onChangeNewPostForm}
 						/>
 						<Form.Text id='title-help' muted>
 							Required
@@ -38,6 +66,8 @@ const AddPostModal = () => {
 							rows={3}
 							placeholder='Description'
 							name='description'
+							value={description}
+							onChange={onChangeNewPostForm}
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -45,6 +75,8 @@ const AddPostModal = () => {
 							type='text'
 							placeholder='Tutorial URL'
 							name='url'
+							value={url}
+							onChange={onChangeNewPostForm}
 						/>
 					</Form.Group>
 				</Modal.Body>

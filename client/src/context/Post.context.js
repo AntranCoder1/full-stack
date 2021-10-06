@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useReducer, useState } from 'react';
 import { postReducer } from '../reducers/Post.reducer'
-import { apiUrl, POSTS_LOADED_FAIL, POSTS_LOADED_SUCCESS } from './Contant'
+import { 
+    apiUrl, 
+    POSTS_LOADED_FAIL, 
+    POSTS_LOADED_SUCCESS, 
+    ADD_POST,
+    DELETE_POST
+} from './Contant'
 import axios from 'axios'
 
 
@@ -15,6 +21,11 @@ const PostContextProvider = ({children}) => {
     }) 
 
     const [showAddPostModal, setShowAddPostModal] = useState(false)
+    const [showToast, setShowToast] = useState({
+        show: false,
+        message: '',
+        type: null
+    })
 
     // Get All Post
     const getPost = async () => {
@@ -27,8 +38,42 @@ const PostContextProvider = ({children}) => {
         }
     }
 
+    // Add post
+    const addPost = async newPost => {
+        try {
+            const response = await axios.post(`${apiUrl}/posts`, newPost)
+
+            if (response.data.success) 
+                dispatch({ type: ADD_POST, payload: response.data.post })
+                return response.data
+        } catch (error) {
+            return error.response.data ? error.response.data : {success: false, message: 'Server error'}
+        }
+    }
+
+    // Delete Post
+    const deletePost = async postId => {
+        try {
+            const response = await axios.delete(`${apiUrl}/posts/${postId}`)
+            
+            if (response.data.success)
+                dispatch({ type: DELETE_POST, payload: postId })
+        } catch (error) {
+            return error.response.data ? error.response.data : {success: false, message: 'Server error'}
+        }
+    }
+
     // Post context data
-    const postContextData = { postState, getPost, showAddPostModal, setShowAddPostModal }
+    const postContextData = { 
+        postState, 
+        getPost, 
+        showAddPostModal, 
+        setShowAddPostModal, 
+        addPost, 
+        showToast, 
+        setShowToast,
+        deletePost
+    }
 
     return (
         <postContext.Provider value={postContextData}>

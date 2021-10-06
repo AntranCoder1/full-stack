@@ -39,7 +39,7 @@ router.post('/', verifyToken, async (req, res) => {
 
         await newPost.save()
 
-        res.json({ success: true, message: 'Happy learning!', post: newPost })
+        res.status(500).json({ success: false, message: 'Happy learning!', post: newPost })
     } catch (error) {
         console.log(error);
         res.status(400).json({ success: false, message: 'Internal server error' })
