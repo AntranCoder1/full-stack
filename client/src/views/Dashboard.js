@@ -13,6 +13,7 @@ import SinglePost from '../components/posts/SinglePost';
 import ActionButtons from '../components/posts/ActionButtons';
 import AddPostModal from '../components/posts/AddPostModal';
 import AddIcon from '../assets/plus-circle-fill.svg';
+import EditPostModal from '../components/posts/EditPostsModal';
 
 const Dashboard = () => {
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
     const { authState: { user: { username } } } = useContext(AuthContext)
 
     const { 
-        postState: { posts, postsLoading }, 
+        postState: { post, posts, postsLoading }, 
         getPost, 
         setShowAddPostModal, 
         showToast: { show, message, type },
@@ -81,6 +82,7 @@ const Dashboard = () => {
         <>
             {body}
             <AddPostModal />
+            {post !== null && <EditPostModal />}
 
             {/* After post is added, show toats */}
             <Toast 
